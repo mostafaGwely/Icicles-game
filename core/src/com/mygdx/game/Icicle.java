@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -15,7 +17,7 @@ public class Icicle {
         velocity = new Vector2(0, 0);
     }
 
-    public void render(ShapeRenderer shapeRenderer, float delta){
+    public void render(ShapeRenderer shapeRenderer, float delta) {
         shapeRenderer.setColor(Constants.ICICLE_COLOR);
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
 
@@ -29,8 +31,23 @@ public class Icicle {
 
     }
 
-    void update(float delta){
+    void update(float delta) {
         velocity.y += delta * Constants.ICICLES_GRAVITY;
         position.y += delta * velocity.y;
-     }
+    }
+
+    public boolean isBelowScreen() {
+        return position.y < 0;
+    }
+
+    public boolean isDead(Player player) {
+        Vector2 playerPosition = player.position;
+        return (position.x > playerPosition.x - Constants.PLAYER_HEAD_RADIUS)  &&
+                (position.x < playerPosition.x + Constants.PLAYER_HEAD_RADIUS) &&
+                (position.y > playerPosition.y - Constants.PLAYER_HEAD_RADIUS) &&
+                (position.y < playerPosition.y + Constants.PLAYER_HEAD_RADIUS);
+
+    }
+
+
 }

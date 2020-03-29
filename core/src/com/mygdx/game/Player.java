@@ -10,9 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends InputAdapter {
     Vector2 position;
     Vector2 velocity;
+    public int deaths;
 
     public Player(Vector2 position) {
         this.position = position;
+        deaths = 0;
         this.position.y = Constants.PLAYER_HEAD_HEIGHT - Constants.PLAYER_HEAD_RADIUS;
 
         velocity = new Vector2(Constants.PLAYER_SPEED, 0);
@@ -79,5 +81,15 @@ public class Player extends InputAdapter {
 
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.UP)
+            Constants.ICICLES_GRAVITY += 100;
+        if(keycode == Input.Keys.DOWN)
+            Constants.ICICLES_GRAVITY -= 100;
+        if(keycode == Input.Keys.T)
+            Constants.SPAWNS_PER_SECOND += 100;
 
+        return true;
+    }
 }

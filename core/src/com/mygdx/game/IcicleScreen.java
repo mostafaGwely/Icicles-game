@@ -16,6 +16,7 @@ public class IcicleScreen extends ScreenAdapter {
 
     Icicles icicles;
     Player player;
+    public  int topScore;
 
     @Override
     public void show() {
@@ -23,7 +24,7 @@ public class IcicleScreen extends ScreenAdapter {
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         shapeRenderer.setAutoShapeType(true);
         icicles = new Icicles();
-
+        topScore = 0;
         player = new Player(new Vector2(Gdx.graphics.getWidth() / 2, 0));
         Gdx.input.setInputProcessor(player);
     }
@@ -39,9 +40,11 @@ public class IcicleScreen extends ScreenAdapter {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         icicles.render(shapeRenderer, delta);
-        icicles.create(delta);
+        icicles.update(delta, player);
         player.render(shapeRenderer);
         shapeRenderer.end();
+        topScore = Math.max(topScore, icicles.score);
+
     }
 
     @Override

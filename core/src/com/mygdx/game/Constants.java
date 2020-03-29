@@ -7,7 +7,7 @@ public class Constants {
     public static float ICICLES_WIDTH = 10.0F;
     public static float ICICLES_HEIGHT = 30.0F;
     public static Color ICICLE_COLOR = Color.WHITE;
-    public static float ICICLES_GRAVITY = -30;
+    public static float ICICLES_GRAVITY = -300;
     public static float SPAWNS_PER_SECOND = 4;
 
     public static float PLAYER_HEAD_RADIUS = 20.F;
