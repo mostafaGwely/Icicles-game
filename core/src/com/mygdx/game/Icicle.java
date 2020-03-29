@@ -7,14 +7,19 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class Icicle {
     Vector2 position;
+    Vector2 velocity;
 
     public Icicle(Vector2 position) {
+
         this.position = position;
+        velocity = new Vector2(0, 0);
     }
 
-    public void render(ShapeRenderer shapeRenderer){
+    public void render(ShapeRenderer shapeRenderer, float delta){
         shapeRenderer.setColor(Constants.ICICLE_COLOR);
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
+
+        update(delta);
 
         shapeRenderer.triangle(
                 position.x, position.y,
@@ -23,4 +28,9 @@ public class Icicle {
         );
 
     }
+
+    void update(float delta){
+        velocity.y += delta * Constants.ICICLES_GRAVITY;
+        position.y += delta * velocity.y;
+     }
 }

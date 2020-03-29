@@ -14,7 +14,7 @@ public class IcicleScreen extends ScreenAdapter {
     ShapeRenderer shapeRenderer;
     Viewport viewport;
 
-    Icicle icicle;
+    Icicles icicles;
     Player player;
 
     @Override
@@ -22,8 +22,8 @@ public class IcicleScreen extends ScreenAdapter {
         shapeRenderer = new ShapeRenderer();
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         shapeRenderer.setAutoShapeType(true);
+        icicles = new Icicles();
 
-        icicle = new Icicle(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2));
         player = new Player(new Vector2(Gdx.graphics.getWidth() / 2, 0));
         Gdx.input.setInputProcessor(player);
     }
@@ -38,8 +38,8 @@ public class IcicleScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        icicle.render(shapeRenderer);
-
+        icicles.render(shapeRenderer, delta);
+        icicles.create(delta);
         player.render(shapeRenderer);
         shapeRenderer.end();
     }
